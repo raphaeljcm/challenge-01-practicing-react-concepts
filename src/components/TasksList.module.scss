@@ -1,0 +1,102 @@
+.form_component {
+  display: flex;
+  margin-top: -2rem;
+
+  > input {
+    flex: 1;
+    margin-right: .5rem;
+    
+    padding: 1rem;
+    border: none;
+    border: 1px solid var(--gray-700);
+    border-radius: 8px;
+    background-color: var(--gray-500);
+    color: var(--gray-300);
+  }
+
+  > button[type="submit"] {
+    padding: 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--blueDark);
+    color: var(--gray-100);
+    font-size: 1rem;
+    font-weight: 700;
+
+    display: inline-flex;
+    align-items: center;
+
+    transition: .1s background-color;
+
+    &:hover { 
+      background-color: var(--blue);
+    }
+
+    img {
+      margin-left: .5rem;
+    }
+  }
+}
+.tasks {
+  margin-top: 4rem;
+
+  &_container {
+    display: flex;
+    justify-content: space-between;
+
+    div span {
+      padding: 0.25rem .6rem;
+      color: var(--gray-200);
+      background-color: var(--gray-400);
+      border-radius: 100rem;
+      font-size: 1rem;
+      margin-left: 1rem;
+      
+    }
+
+    .created, .done {
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 1.14rem;
+      line-height: 1rem;
+    }
+
+    .done {
+      color: var(--purple);
+    }
+  }
+
+  .tasks_list {
+    margin-top: 1.5rem;
+
+    .empty {
+      padding: 4rem 1.5rem;
+      border-top: 1px solid var(--gray-400);
+      border-radius: 8px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      div {
+        margin-top: 1rem;
+
+        p {
+          color: var(--gray-300);
+          line-height: 140%;
+        }
+
+        p:first-child {
+          font-weight: 700;
+        }
+      }
+    }
+
+    .not_empty {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+  }
+}
