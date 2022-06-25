@@ -5,7 +5,7 @@ import plus from '../assets/plus.svg';
 
 import styles from './TasksList.module.scss';
 import { TaskRow } from './TaskRow';
-import { FormEvent, useCallback, useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, InvalidEvent, useCallback, useRef, useState } from 'react';
 
 type Tasks = {
   id: string;
@@ -37,6 +37,14 @@ export function TasksList() {
     }
   }
 
+  function handleInvalidTask(event: InvalidEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('Este campo é obrigatório!');
+  }
+
+  function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('');
+  }
+
   const handleTaskDone = useCallback((taskId: string) => {
     const newTasks = tasks.map(task => {
       if(task.id === taskId) {
@@ -62,6 +70,8 @@ export function TasksList() {
           type="text"
           name="taskName"
           placeholder='Adicionar uma nova tarefa'
+          onInvalid={handleInvalidTask}
+          onChange={handleNewTaskChange}
           required
           ref={inputEl}
         />
