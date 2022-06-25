@@ -5,7 +5,7 @@ import plus from '../assets/plus.svg';
 
 import styles from './TasksList.module.scss';
 import { TaskRow } from './TaskRow';
-import { FormEvent, useCallback, useState } from 'react';
+import { FormEvent, useCallback, useRef, useState } from 'react';
 
 type Tasks = {
   id: string;
@@ -15,6 +15,7 @@ type Tasks = {
 
 export function TasksList() {
   const [tasks, setTasks] = useState<Tasks[]>([]);
+  const inputEl = useRef<HTMLInputElement>(null);
 
   const tasksDone = tasks.reduce((acc, cur) => {
     if(cur.done === true) {
@@ -26,11 +27,14 @@ export function TasksList() {
 
   function handleAddTask(event: FormEvent) {
     event.preventDefault();
+    
+    if(inputEl.current !== null) {
+      const newTaskName = inputEl.current.value;
+      const newTaskId = uuidv4();
 
-    const newTaskName = event.target.taskName.value;
-    const newTaskId = uuidv4();
-    event.target.taskName.value = '';
-    setTasks(prev => [...prev, { id: newTaskId, name: newTaskName, done: false }]);
+      inputEl.current.value = '';
+      setTasks(prev => [...prev, { id: newTaskId, name: newTaskName, done: false }]);
+    }
   }
 
   const handleTaskDone = useCallback((taskId: string) => {
@@ -59,6 +63,7 @@ export function TasksList() {
           name="taskName"
           placeholder='Adicionar uma nova tarefa'
           required
+          ref={inputEl}
         />
         <button type="submit">
           Criar
