@@ -26,7 +26,7 @@ export function TasksList() {
           [to, 0, prevTasks[from]]
         ]
       })
-    )
+    );
   }, []);
 
   const tasksDone = tasks.reduce((acc, cur) => {

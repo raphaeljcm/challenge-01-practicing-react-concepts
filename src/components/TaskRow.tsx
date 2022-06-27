@@ -60,10 +60,10 @@ export function TaskRow({ task, onTaskDone, onTaskDeleted, index, onMove }: Task
         onMove(draggedIndex, targetIndex);
 
         // Note: we're mutating the monitor item here!
-          // Generally it's better to avoid mutations,
-          // but it's good here for the sake of performance
-          // to avoid expensive index searches.
-          item.index = targetIndex;
+        // Generally it's better to avoid mutations,
+        // but it's good here for the sake of performance
+        // to avoid expensive index searches.
+        item.index = targetIndex;
       }
     }
   });
