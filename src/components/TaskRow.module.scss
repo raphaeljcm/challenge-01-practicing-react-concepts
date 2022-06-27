@@ -26,6 +26,7 @@
 
   div {
     width: 1.5rem;
+    flex-shrink: 0;
     height: 1.5rem;
     border: 2px solid var(--blue);
     border-radius: 1.5rem;
