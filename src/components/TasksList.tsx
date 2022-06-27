@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import update from 'immutability-helper';
 
 import clipboard from '../assets/clipboard.svg';
 import plus from '../assets/plus.svg';
@@ -17,6 +18,17 @@ export function TasksList() {
   const [tasks, setTasks] = useState<Tasks[]>([]);
   const inputEl = useRef<HTMLInputElement>(null);
 
+  const move = useCallback((from: number, to: number) => {
+    setTasks((prevTasks: Tasks[]) => 
+      update(prevTasks, {
+        $splice: [
+          [from, 1],
+          [to, 0, prevTasks[from]]
+        ]
+      })
+    )
+  }, []);
+
   const tasksDone = tasks.reduce((acc, cur) => {
     if(cur.done === true) {
       acc++;
@@ -33,6 +45,7 @@ export function TasksList() {
       const newTaskId = uuidv4();
 
       inputEl.current.value = '';
+      inputEl.current.focus();
       setTasks(prev => [...prev, { id: newTaskId, name: newTaskName, done: false }]);
     }
   }
@@ -112,8 +125,15 @@ export function TasksList() {
           )
           : (
             <div className={styles.not_empty}>
-              {tasks.map(task => (
-                <TaskRow key={task.id} task={task} onTaskDone={handleTaskDone} onTaskDeleted={handleTaskDeleted} />
+              {tasks.map((task, index) => (
+                <TaskRow 
+                  key={task.id} 
+                  index={index}
+                  task={task} 
+                  onTaskDone={handleTaskDone} 
+                  onTaskDeleted={handleTaskDeleted}
+                  onMove={move}
+                />
               ))}
             </div>
           )}
