@@ -12,6 +12,7 @@
 
   &:hover {
     filter: brightness(.9);
+    cursor: grab;
   }
 
   &.is_dragging {
@@ -31,7 +32,6 @@
     border: 2px solid var(--blue);
     border-radius: 1.5rem;
     background-color: transparent;
-    cursor: pointer;
 
     display: flex;
     align-items: center;
